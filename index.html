@@ -1,307 +1,313 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>TriJUG — Triangle Java Users Group</title>
-  <meta
-    name="description"
-    content="TriJUG (Triangle Java Users Group) helps the community learn Java through monthly meetups, talks, and networking in the Triangle area."
-  />
-  <style>
-    :root {
-      --bg: #0b0f14;
-      --panel: #0f1620;
-      --text: #d7e0ea;
-      --muted: #91a4b7;
-      --green: #39ff88;
-      --cyan: #67d6ff;
-      --yellow: #ffe08a;
-      --red: #ff6b6b;
-      --border: rgba(215, 224, 234, 0.14);
-      --shadow: rgba(0, 0, 0, 0.5);
-    }
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>TriJUG — Triangle Java Users Group</title>
+    <meta
+            name="description"
+            content="TriJUG (Triangle Java Users Group) helps the community learn Java through monthly meetups, talks, and networking in the Triangle area."
+    />
+    <style>
+        :root {
+            --bg: #0b0f14;
+            --panel: #0f1620;
+            --text: #d7e0ea;
+            --muted: #91a4b7;
+            --green: #39ff88;
+            --cyan: #67d6ff;
+            --yellow: #ffe08a;
+            --red: #ff6b6b;
+            --border: rgba(215, 224, 234, 0.14);
+            --shadow: rgba(0, 0, 0, 0.5);
+        }
 
-    * {
-      box-sizing: border-box;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    html, body {
-      height: 100%;
-    }
+        html, body {
+            height: 100%;
+        }
 
-    body {
-      margin: 0;
-      background: radial-gradient(1200px 700px at 20% 10%, #132033 0%, var(--bg) 55%) fixed;
-      color: var(--text);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      line-height: 1.55;
-    }
+        body {
+            margin: 0;
+            background: radial-gradient(1200px 700px at 20% 10%, #132033 0%, var(--bg) 55%) fixed;
+            color: var(--text);
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            line-height: 1.55;
+        }
 
-    .wrap {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 26px 18px 44px;
-    }
+        .wrap {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 26px 18px 44px;
+        }
 
-    .terminal {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)), var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 24px 60px var(--shadow);
-    }
+        .terminal {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)), var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 24px 60px var(--shadow);
+        }
 
-    .termbar {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.02);
-    }
+        .termbar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.02);
+        }
 
-    .dots {
-      display: flex;
-      gap: 8px;
-    }
+        .dots {
+            display: flex;
+            gap: 8px;
+        }
 
-    .dot {
-      width: 11px;
-      height: 11px;
-      border-radius: 999px;
-      opacity: 0.9;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35) inset;
-    }
+        .dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 999px;
+            opacity: 0.9;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35) inset;
+        }
 
-    .dot.red {
-      background: #ff5f56;
-    }
+        .dot.red {
+            background: #ff5f56;
+        }
 
-    .dot.yellow {
-      background: #ffbd2e;
-    }
+        .dot.yellow {
+            background: #ffbd2e;
+        }
 
-    .dot.green {
-      background: #27c93f;
-    }
+        .dot.green {
+            background: #27c93f;
+        }
 
-    .title {
-      margin-left: 6px;
-      color: var(--muted);
-      font-size: 0.95rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+        .title {
+            margin-left: 6px;
+            color: var(--muted);
+            font-size: 0.95rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-    .screen {
-      padding: 18px 18px 22px;
-    }
+        .screen {
+            padding: 18px 18px 22px;
+        }
 
-    .line {
-      display: block;
-      padding: 4px 0;
-    }
+        .line {
+            display: block;
+            padding: 4px 0;
+        }
 
-    .prompt {
-      color: var(--green);
-    }
+        .prompt {
+            color: var(--green);
+        }
 
-    .cmd {
-      color: var(--text);
-    }
+        .cmd {
+            color: var(--text);
+        }
 
-    .out {
-      color: var(--text);
-    }
+        .out {
+            color: var(--text);
+        }
 
-    .muted {
-      color: var(--muted);
-    }
+        .muted {
+            color: var(--muted);
+        }
 
-    .accent {
-      color: var(--cyan);
-    }
+        .accent {
+            color: var(--cyan);
+        }
 
-    .warn {
-      color: var(--yellow);
-    }
+        .warn {
+            color: var(--yellow);
+        }
 
-    a {
-      color: var(--cyan);
-      text-decoration: none;
-      border-bottom: 1px dotted rgba(103, 214, 255, 0.55);
-    }
+        a {
+            color: var(--cyan);
+            text-decoration: none;
+            border-bottom: 1px dotted rgba(103, 214, 255, 0.55);
+        }
 
-    a:hover {
-      border-bottom-style: solid;
-    }
+        a:hover {
+            border-bottom-style: solid;
+        }
 
-    .where-details {
-      display: inline-block;
-    }
+        .where-details {
+            display: inline-block;
+        }
 
-    .where-address {
-      display: block;
-    }
+        .where-address {
+            display: block;
+        }
 
-    .block {
-      margin: 10px 0 14px;
-      padding-left: 14px;
-      border-left: 2px solid rgba(57, 255, 136, 0.35);
-    }
+        .block {
+            margin: 10px 0 14px;
+            padding-left: 14px;
+            border-left: 2px solid rgba(57, 255, 136, 0.35);
+        }
 
-    .kbd {
-      color: var(--text);
-      background: rgba(215, 224, 234, 0.06);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1px 6px;
-    }
+        .kbd {
+            color: var(--text);
+            background: rgba(215, 224, 234, 0.06);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1px 6px;
+        }
 
-    .cursor {
-      display: inline-block;
-      width: 9px;
-      height: 1.15em;
-      background: rgba(57, 255, 136, 0.85);
-      vertical-align: -3px;
-      margin-left: 2px;
-      animation: blink 1.05s steps(1) infinite;
-    }
-    .where-details { display: inline-flex; flex-direction: column; }
-    .where-address { display: block; }
-    @keyframes blink {
-      50% {
-        opacity: 0;
-      }
-    }
+        .cursor {
+            display: inline-block;
+            width: 9px;
+            height: 1.15em;
+            background: rgba(57, 255, 136, 0.85);
+            vertical-align: -3px;
+            margin-left: 2px;
+            animation: blink 1.05s steps(1) infinite;
+        }
 
-    .hr {
-      margin: 14px 0;
-      border-top: 1px dashed rgba(215, 224, 234, 0.18);
-    }
+        .where-details {
+            display: inline-flex;
+            flex-direction: column;
+        }
 
-    footer {
-      margin-top: 14px;
-      padding: 10px 0 0;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
+        .where-address {
+            display: block;
+        }
 
-    @media (prefers-reduced-motion: reduce) {
-      .cursor {
-        animation: none;
-      }
-    }
-  </style>
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .hr {
+            margin: 14px 0;
+            border-top: 1px dashed rgba(215, 224, 234, 0.18);
+        }
+
+        footer {
+            margin-top: 14px;
+            padding: 10px 0 0;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .cursor {
+                animation: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
 <div class="wrap">
-  <div class="terminal" role="region" aria-label="TriJUG terminal-style homepage">
-    <div class="termbar">
-      <div class="dots" aria-hidden="true">
-        <span class="dot red"></span>
-        <span class="dot yellow"></span>
-        <span class="dot green"></span>
-      </div>
-      <div class="title">duke@trijug.dev:~ # Triangle Java Users Group</div>
-    </div>
+    <div class="terminal" role="region" aria-label="TriJUG terminal-style homepage">
+        <div class="termbar">
+            <div class="dots" aria-hidden="true">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+            </div>
+            <div class="title">duke@trijug.dev:~ # Triangle Java Users Group</div>
+        </div>
 
-    <main class="screen">
+        <main class="screen">
           <span class="line">
             <span class="prompt">duke@trijug.dev</span>:<span class="accent">~</span>$ <span
-            class="cmd">cat README.txt</span>
+                  class="cmd">cat README.txt</span>
           </span>
 
-      <div class="block">
-        <span class="line out"><span class="accent">TriJUG</span> — Triangle Java Users Group</span>
-        <span class="line out muted">----------------------------------------------</span>
-        <span class="line out">
+            <div class="block">
+                <span class="line out"><span class="accent">TriJUG</span> — Triangle Java Users Group</span>
+                <span class="line out muted">----------------------------------------------</span>
+                <span class="line out">
           The Triangle Java Users group was established to provide Java and OpenSource related information to
           its members, to facilitate contacts between its members, and to promote the use of technology in the
           Triangle area of North Carolina. TriJUG is a non-profit, vendor-independent organization.
         </span>
-      </div>
+                <span class="line out warn">Stay in Contact</span>
+                <span class="line out">
+            &#x2022; Join our Discord server --> <a href="https://discord.trijug.dev/" target="_blank"
+                                                    rel="noopener noreferrer">discord.trijug.dev</a>
+            </span>
+                <span class="line out">
+            &#x2022; Our CFP is always open, first timers welcome! --> <a href="https://cfp.trijug.dev/" target="_blank"
+                                                                          rel="noopener noreferrer">cfp.trijug.dev</a>
+          </span>
+                <span class="line out">
+            &#x2022; Email with questions or ideas --> <a href="mailto:todd@trijug.dev">todd@trijug.dev</a>
+        </span>
+            </div>
 
-      <span class="line">
+            <span class="line">
             <span class="prompt">duke@trijug.dev</span>:<span class="accent">~</span>$ <span class="cmd">cat meetings.txt</span>
           </span>
 
-      <div class="block">
-        <span class="line out"><span class="accent">When:</span> Once a month, day varies depending on speaker and venue availability</span>
-        <span class="line out">
+            <div class="block">
+                <span class="line out"><span class="accent">When:</span> Once a month, day varies depending on speaker and venue availability</span>
+                <span class="line out">
           <span class="accent">Where:</span>
           <span class="where-details">
             <span class="where-venue">Deutsche Bank Cary Tech Centre</span>
-            <span class="where-address"><a href="https://maps.app.goo.gl/ozfiiX2E7QZwWgzs8" target="_blank" rel="noopener noreferrer">3000 Centregreen Way, Cary, NC, 27513</a></span>
+            <span class="where-address"><a href="https://maps.app.goo.gl/ozfiiX2E7QZwWgzs8" target="_blank"
+                                           rel="noopener noreferrer">3000 Centregreen Way, Cary, NC, 27513</a></span>
           </span>
         </span>
-        <span class="line out"><span class="accent">What:</span> Community talks + Q&amp;A + Networking</span>
-        <span class="line out"><span class="accent">RSVP:</span> Learn about the next meeting
+                <span class="line out"><span class="accent">What:</span> Community talks + Q&amp;A + Networking</span>
+                <span class="line out"><span class="accent">RSVP:</span> Learn about the next meeting
           <a href="https://www.meetup.com/triangle-java-users-group/" target="_blank" rel="noopener noreferrer">
                 on Meetup.com
               </a></span>
-        <span class="line out muted">
+                <span class="line out muted">
               Talk details along with date, time, and location are posted on our Meetup page as they become available
             </span>
-      </div>
+            </div>
 
 
-      <span class="line">
+            <span class="line">
             <span class="prompt">duke@trijug.dev</span>:<span class="accent">~</span>$ <span
-        class="cmd">cat sponsors.txt</span>
+                    class="cmd">cat sponsors.txt</span>
           </span>
 
-      <div class="block">
+            <div class="block">
             <span class="line out">
               Thank you to <a href="https://careers.db.com/" target="_blank" rel="noopener noreferrer">Deutsche Bank</a> for hosting!
             </span>
-        <span class="line out">
+                <span class="line out">
           Thank you to <a href="https://jetbrains.com/" target="_blank" rel="noopener noreferrer">JetBrains</a> for providing product licenses to give away monthly!
             </span>
-      </div>
+            </div>
 
-      <span class="line">
-            <span class="prompt">duke@trijug.dev</span>:<span class="accent">~</span>$ <span
-        class="cmd">cat contact.txt</span>
-          </span>
+            <div class="hr"></div>
 
-      <div class="block">
-            <span class="line out">
-              Email: <a href="mailto:todd@trijug.dev">todd@trijug.dev</a>
-            </span>
-        <span class="line out">
-              Want to speak? First-time speakers are welcome!<br/>
-              Our CFP is always open - <a href="https://cfp.trijug.dev" target="_blank" rel="noopener noreferrer">submit your talk here</a>.
-            </span>
-      </div>
-
-      <div class="hr"></div>
-
-      <span class="line">
+            <span class="line">
             <span class="prompt">duke@trijug.dev</span>:<span class="accent">~</span>$ <span class="cmd">date</span>
           </span>
-      <span class="line out muted">
+            <span class="line out muted">
             <span id="today">Loading…</span>
           </span>
 
-      <span class="line">
+            <span class="line">
             <span class="prompt">duke@trijug.dev</span>:<span class="accent">~</span>$ <span
-        class="cursor" aria-hidden="true"></span>
+                    class="cursor" aria-hidden="true"></span>
           </span>
 
-      <footer>
-        &copy; <span id="year"></span> TriJUG — Triangle Java Users Group
-      </footer>
-    </main>
-  </div>
+            <footer>
+                &copy; <span id="year"></span> TriJUG — Triangle Java Users Group
+            </footer>
+        </main>
+    </div>
 </div>
 
 <script>
-  document.getElementById("year").textContent = String(new Date().getFullYear());
-  document.getElementById("today").textContent = new Date().toString();
+    document.getElementById("year").textContent = String(new Date().getFullYear());
+    document.getElementById("today").textContent = new Date().toString();
 </script>
 </body>
 </html>
